@@ -1,9 +1,6 @@
 package com.bookmyshow.demo.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +13,9 @@ public class Booking extends BaseModel{
 
     @Enumerated(EnumType.ORDINAL)
     private BookingStatus bookingStatus;
+
+    @ManyToOne
+    private User user;
 
     // to handle cancelation then it will be m to m
     @OneToMany
