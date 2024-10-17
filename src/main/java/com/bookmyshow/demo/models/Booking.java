@@ -24,4 +24,5 @@ public class Booking extends BaseModel{
 
     @OneToMany
     private List<Payment> payments;
+
 }

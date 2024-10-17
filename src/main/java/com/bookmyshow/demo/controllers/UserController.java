@@ -6,6 +6,9 @@ import com.bookmyshow.demo.exceptions.UserDoesNotExist;
 import com.bookmyshow.demo.models.User;
 import com.bookmyshow.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,7 +17,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    public SignupUserResponseDto signup(SignupUserRequestDto requestDto){
+    @RequestMapping("/signup")
+    public SignupUserResponseDto signup(@RequestBody SignupUserRequestDto requestDto){
         User user;
         try {
             user = userService.signup(requestDto);
@@ -24,7 +28,8 @@ public class UserController {
         return new SignupUserResponseDto(user.getId(), ResponseStatus.SUCCESS);
     }
 
-    public boolean login(LoginUserRequestDto requestDto){
+    @GetMapping("/login")
+    public boolean login(@RequestBody LoginUserRequestDto requestDto){
         try {
             return userService.login(requestDto.getEmail(), requestDto.getPassword());
         } catch (UserDoesNotExist e) {

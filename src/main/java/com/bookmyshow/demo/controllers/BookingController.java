@@ -9,6 +9,8 @@ import com.bookmyshow.demo.exceptions.UserIsNotValid;
 import com.bookmyshow.demo.models.Booking;
 import com.bookmyshow.demo.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,8 +27,8 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    public BookShowResponseDto bookShow(BookShowRequestDto requestDto) {
-
+    @RequestMapping("/bookMyShow")
+    public BookShowResponseDto bookShow(@RequestBody BookShowRequestDto requestDto) {
 
         try {
             Booking booking =  bookingService.bookShow(requestDto);
@@ -37,7 +39,7 @@ public class BookingController {
             return new BookShowResponseDto(null, 0, ResponseStatus.FAILURE, Show_Invalid);
         } catch (SeatNotAvailable e) {
             return new BookShowResponseDto(null, 0, ResponseStatus.FAILURE, SomethingWentWrong);
-
         }
+
     }
 }

@@ -5,9 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LoginUserRequestDto {
+public class ErrorResponseDto {
 
-    private String email;
-    private String password;
+    private int errorStatus;
+    private String errorMessage;
 
 }
